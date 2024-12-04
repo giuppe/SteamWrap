@@ -1,6 +1,8 @@
 package steamwrap.api;
 
+#if cpp
 import cpp.Lib;
+#end
 import haxe.Int64;
 import steamwrap.api.Steam.EnumerateWorkshopFilesResult;
 import steamwrap.api.Steam.DownloadUGCResult;
@@ -110,7 +112,7 @@ class Steam {
 		appId = appId_;
 		leaderboardIds = new Array<String>();
 		leaderboardOps = new List<LeaderboardOp>();
-
+		#if cpp
 		try {
 			SteamWrap_ClearAchievement = cpp.Lib.load("steamwrap", "SteamWrap_ClearAchievement", 1);
 			SteamWrap_DownloadScores = cpp.Lib.load("steamwrap", "SteamWrap_DownloadScores", 4);
@@ -148,9 +150,12 @@ class Steam {
 			SteamWrap_BIsAppInstalled = cpp.Lib.load("steamwrap", "SteamWrap_BIsAppInstalled", 1);
 			SteamWrap_BIsDlcInstalled = cpp.Lib.load("steamwrap", "SteamWrap_BIsDlcInstalled", 1);
 		} catch (e:Dynamic) {
+		#end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
+		#if cpp 
 		}
+		#end
 
 		// if we get this far, the dlls loaded ok and we need Steam to init.
 		// otherwise, we're trying to run the Steam version without the Steam client
