@@ -150,7 +150,7 @@ class Steam {
 			SteamWrap_BIsAppInstalled = cpp.Lib.load("steamwrap", "SteamWrap_BIsAppInstalled", 1);
 			SteamWrap_BIsDlcInstalled = cpp.Lib.load("steamwrap", "SteamWrap_BIsDlcInstalled", 1);
 		} catch (e:Dynamic) {
-		#end
+			#else var e = "Hashlink not supported"; #end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
 		#if cpp 

@@ -349,7 +349,7 @@ class UGC
 			SteamWrap_GetQueryUGCMetadata = cpp.Lib.load("steamwrap", "SteamWrap_GetQueryUGCMetadata", 3);
 		}
 		catch (e:Dynamic) {
-			#end
+			#else var e = "Hashlink not supported"; #end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
 			#if cpp } #end

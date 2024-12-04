@@ -29,12 +29,14 @@ class Loader
 	 * If that fails, logs the error and returns a fallback function to reduce the odds of hard crashing on call to a broken function.
 	 */
 	public static function loadRaw(name:String, argc:Int):Dynamic {
+		#if cpp
 		try {
 			var r = cpp.Lib.load("steamwrap", name, argc);
 			if (r != null) return r;
 		} catch (e:Dynamic) {
+		#else var e = "Hashlink not supported"; #end
 			loadErrors.push(Std.string(e));
-		}
+		#if cpp } #end
 		return function() {
 			trace('Error: $name is not loaded.');
 			return null;

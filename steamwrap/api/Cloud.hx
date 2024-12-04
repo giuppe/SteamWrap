@@ -130,7 +130,7 @@ class Cloud
 			SteamWrap_GetQuota = cpp.Lib.load("steamwrap", "SteamWrap_GetQuota", 0);
 		}
 		catch (e:Dynamic) {
-		#end
+			#else var e = "Hashlink not supported"; #end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
 		#if cpp } #end 

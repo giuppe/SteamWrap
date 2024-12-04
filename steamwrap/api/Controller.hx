@@ -596,7 +596,7 @@ class Controller {
 			SteamWrap_GetControllerMaxAnalogActionData = cpp.Lib.load("steamwrap", "SteamWrap_GetControllerMaxAnalogActionData", 0);
 			SteamWrap_GetControllerMinAnalogActionData = cpp.Lib.load("steamwrap", "SteamWrap_GetControllerMinAnalogActionData", 0);
 		} catch (e:Dynamic) {
-			#end
+			#else var e = "Hashlink not supported"; #end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
 		#if cpp } #end
