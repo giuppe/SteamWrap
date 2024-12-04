@@ -1,5 +1,8 @@
 package steamwrap.api;
+
+#if cpp
 import cpp.Lib;
+#end
 import steamwrap.api.Steam;
 import steamwrap.helpers.Loader;
 import steamwrap.helpers.MacroHelper;
@@ -321,7 +324,7 @@ class UGC
 		
 		appId = appId_;
 		customTrace = CustomTrace;
-		
+		#if cpp
 		try {
 			//Old-school CFFI calls:
 			SteamWrap_CreateUGCItem = cpp.Lib.load("steamwrap", "SteamWrap_CreateUGCItem", 1);
@@ -346,9 +349,10 @@ class UGC
 			SteamWrap_GetQueryUGCMetadata = cpp.Lib.load("steamwrap", "SteamWrap_GetQueryUGCMetadata", 3);
 		}
 		catch (e:Dynamic) {
+			#end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
-		}
+			#if cpp } #end
 		
 		
 		

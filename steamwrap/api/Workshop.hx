@@ -1,5 +1,8 @@
 package steamwrap.api;
+
+#if cpp
 import cpp.Lib;
+#end
 import haxe.io.Bytes;
 import haxe.io.BytesData;
 import steamwrap.api.Steam;
@@ -191,16 +194,17 @@ class Workshop
 		
 		appId = appId_;
 		customTrace = CustomTrace;
-		
+		#if cpp
 		try {
 			//Old-school CFFI calls:
 			SteamWrap_GetUGCDownloadProgress = cpp.Lib.load("steamwrap", "SteamWrap_GetUGCDownloadProgress", 1);
 			SteamWrap_UGCRead = cpp.Lib.load("steamwrap", "SteamWrap_UGCRead", 4);
 		}
 		catch (e:Dynamic) {
+		#end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
-		}
+		#if cpp } #end
 		
 		// if we get this far, the dlls loaded ok and we need Steam controllers to init.
 		// otherwise, we're trying to run the Steam version without the Steam client

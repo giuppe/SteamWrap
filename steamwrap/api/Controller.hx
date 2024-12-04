@@ -1,6 +1,8 @@
 package steamwrap.api;
 
+#if cpp
 import cpp.Lib;
+#end
 import haxe.Int32;
 import steamwrap.helpers.Loader;
 import steamwrap.helpers.MacroHelper;
@@ -571,7 +573,7 @@ class Controller {
 
 		if (active)
 			return;
-
+		#if cpp
 		try {
 			// Old-school CFFI calls:
 			SteamWrap_GetConnectedControllers = cpp.Lib.load("steamwrap", "SteamWrap_GetConnectedControllers", 0);
@@ -594,9 +596,10 @@ class Controller {
 			SteamWrap_GetControllerMaxAnalogActionData = cpp.Lib.load("steamwrap", "SteamWrap_GetControllerMaxAnalogActionData", 0);
 			SteamWrap_GetControllerMinAnalogActionData = cpp.Lib.load("steamwrap", "SteamWrap_GetControllerMinAnalogActionData", 0);
 		} catch (e:Dynamic) {
+			#end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
-		}
+		#if cpp } #end
 
 		// if we get this far, the dlls loaded ok and we need Steam controllers to init.
 		// otherwise, we're trying to run the Steam version without the Steam client

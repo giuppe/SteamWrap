@@ -1,5 +1,8 @@
 package steamwrap.api;
+
+#if cpp
 import cpp.Lib;
+#end
 import haxe.io.Bytes;
 import haxe.io.BytesData;
 import steamwrap.api.Steam;
@@ -119,7 +122,7 @@ class Cloud
 		
 		appId = appId_;
 		customTrace = CustomTrace;
-		
+		#if cpp
 		try {
 			//Old-school CFFI calls:
 			SteamWrap_FileRead  = cpp.Lib.load("steamwrap", "SteamWrap_FileRead", 1);
@@ -127,9 +130,10 @@ class Cloud
 			SteamWrap_GetQuota = cpp.Lib.load("steamwrap", "SteamWrap_GetQuota", 0);
 		}
 		catch (e:Dynamic) {
+		#end
 			customTrace("Running non-Steam version (" + e + ")");
 			return;
-		}
+		#if cpp } #end 
 		
 		active = true;
 		
