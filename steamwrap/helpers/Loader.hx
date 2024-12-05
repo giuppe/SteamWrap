@@ -18,7 +18,11 @@ class Loader
 
 	public static inline macro function load(inName2:Expr, inSig:Expr)
 	{
+		#if cpp
 		return macro cpp.Prime.load("steamwrap", $inName2, $inSig, false);
+		#else
+		return macro null;
+		#end
 	}
 	
 	public static var loadErrors:Array<String> = [];
