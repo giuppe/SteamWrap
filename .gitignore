@@ -1,6 +1,6 @@
 /native/include/hx/*.h
 /native/include/steam/*.h
-/native/lib/*
+#/native/lib/*
 /native/obj
 /native/all_objs
 /native/*.pdb
