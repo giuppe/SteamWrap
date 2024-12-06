@@ -380,10 +380,10 @@ void CallbackHandler::OnGamepadTextInputDismissed( GamepadTextInputDismissed_t *
 void CallbackHandler::OnGameOverlayActivated( GameOverlayActivated_t *pCallback )
 {
 	SendEvent(Event(kEventTypeOnGameOverlayActivated, pCallback->m_bActive));
-	if ( pCallback->m_bActive )
+	/*if ( pCallback->m_bActive )
 		printf( "Steam overlay now active\n" );
 	else
-		printf( "Steam overlay now inactive\n" );
+		printf( "Steam overlay now inactive\n" );*/
 }
 
 void CallbackHandler::OnUserStatsReceived( UserStatsReceived_t *pCallback )
