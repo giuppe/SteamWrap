@@ -145,6 +145,7 @@ AutoGCRoot *g_eventHandler = 0;
 //-----------------------------------------------------------------------------------------------------------
 static const char* kEventTypeNone = "None";
 static const char* kEventTypeOnGamepadTextInputDismissed = "GamepadTextInputDismissed";
+static const char* kEventTypeOnGameOverlayActivated = "GameOverlayActivated";
 static const char* kEventTypeOnUserStatsReceived = "UserStatsReceived";
 static const char* kEventTypeOnUserStatsStored = "UserStatsStored";
 static const char* kEventTypeOnUserAchievementStored = "UserAchievementStored";
@@ -291,7 +292,8 @@ public:
  		m_CallbackAchievementStored( this, &CallbackHandler::OnAchievementStored ),
 		m_CallbackGamepadTextInputDismissed( this, &CallbackHandler::OnGamepadTextInputDismissed ),
 		m_CallbackDownloadItemResult( this, &CallbackHandler::OnDownloadItem ),
-		m_CallbackItemInstalled( this, &CallbackHandler::OnItemInstalled )
+		m_CallbackItemInstalled( this, &CallbackHandler::OnItemInstalled ),
+		m_CallbackGameOverlayActivated( this, &CallbackHandler::OnGameOverlayActivated )
 	{}
 
 	STEAM_CALLBACK( CallbackHandler, OnUserStatsReceived, UserStatsReceived_t, m_CallbackUserStatsReceived );
@@ -301,6 +303,7 @@ public:
 	STEAM_CALLBACK( CallbackHandler, OnDownloadItem, DownloadItemResult_t, m_CallbackDownloadItemResult );
 	STEAM_CALLBACK( CallbackHandler, OnItemInstalled, ItemInstalled_t, m_CallbackItemInstalled );
 	STEAM_CALLBACK( CallbackHandler, OnLobbyJoinRequested, GameLobbyJoinRequested_t );
+	STEAM_CALLBACK( CallbackHandler, OnGameOverlayActivated, GameOverlayActivated_t, m_CallbackGameOverlayActivated);
 	
 	void FindLeaderboard(const char* name);
 	void OnLeaderboardFound( LeaderboardFindResult_t *pResult, bool bIOFailure);
@@ -372,6 +375,15 @@ public:
 void CallbackHandler::OnGamepadTextInputDismissed( GamepadTextInputDismissed_t *pCallback )
 {
 	SendEvent(Event(kEventTypeOnGamepadTextInputDismissed, pCallback->m_bSubmitted));
+}
+
+void CallbackHandler::OnGameOverlayActivated( GameOverlayActivated_t *pCallback )
+{
+	SendEvent(Event(kEventTypeOnGameOverlayActivated, pCallback->m_bActive));
+	/*if ( pCallback->m_bActive )
+		printf( "Steam overlay now active\n" );
+	else
+		printf( "Steam overlay now inactive\n" );*/
 }
 
 void CallbackHandler::OnUserStatsReceived( UserStatsReceived_t *pCallback )
@@ -1033,6 +1045,16 @@ value SteamWrap_StoreStats()
 	return alloc_bool(result);
 }
 DEFINE_PRIM(SteamWrap_StoreStats, 0);
+
+value SteamWrap_isOverlayActive()
+{
+	if (!CheckInit())
+		return alloc_bool(false);
+
+	bool result = SteamUserStats()->StoreStats();
+	return alloc_bool(result);
+}
+DEFINE_PRIM(SteamWrap_isOverlayActive, 0);
 
 #pragma endregion
 

@@ -81,6 +81,7 @@ class Steam {
 
 	// User-settable callbacks:
 	public static var whenGamepadTextInputDismissed:String->Void;
+	public static var whenGameOverlayActivated:Bool->Void;
 	public static var whenAchievementStored:String->Void;
 	public static var whenLeaderboardScoreDownloaded:Array<LeaderboardScore>->Void;
 	public static var whenLeaderboardScoreUploaded:LeaderboardScore->Void;
@@ -541,6 +542,11 @@ class Steam {
 					} else {
 						whenGamepadTextInputDismissed(null);
 					}
+				}
+			
+			case "GameOverlayActivated":
+				if (whenGameOverlayActivated != null) {
+					whenGameOverlayActivated(success);
 				}
 
 			case "GlobalStatsReceived":
