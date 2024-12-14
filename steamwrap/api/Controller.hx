@@ -517,6 +517,9 @@ class Controller {
 	private var SteamWrap_ShutdownControllers:Dynamic;
 	private var SteamWrap_GetConnectedControllers:Dynamic;
 	private var SteamWrap_GetDigitalActionOrigins:Dynamic;
+	private var SteamWrap_GetDigitalActionHandle:Dynamic;
+	private var SteamWrap_GetAnalogActionHandle:Dynamic;
+	
 	private var SteamWrap_GetEnteredGamepadTextInput:Dynamic;
 	private var SteamWrap_GetAnalogActionOrigins:Dynamic;
 	private var SteamWrap_ShowBindingPanel:Dynamic;
@@ -538,12 +541,12 @@ class Controller {
 	private var SteamWrap_GetCurrentActionSet = Loader.load("SteamWrap_GetCurrentActionSet", "ii");
 	private var SteamWrap_GetActionSetHandle = Loader.load("SteamWrap_GetActionSetHandle", "ci");
 	private var SteamWrap_GetAnalogActionData = Loader.load("SteamWrap_GetAnalogActionData", "iii");
-	private var SteamWrap_GetAnalogActionHandle = Loader.load("SteamWrap_GetAnalogActionHandle", "ci");
+	//private var SteamWrap_GetAnalogActionHandle = Loader.load("SteamWrap_GetAnalogActionHandle", "ci");
 	private var SteamWrap_GetDigitalActionData = Loader.load("SteamWrap_GetDigitalActionData", "iii");
 	private var SteamWrap_GetAnalogActionData_eMode = Loader.load("SteamWrap_GetAnalogActionData_eMode", "ii");
 	private var SteamWrap_GetAnalogActionData_x = Loader.load("SteamWrap_GetAnalogActionData_x", "if");
 	private var SteamWrap_GetAnalogActionData_y = Loader.load("SteamWrap_GetAnalogActionData_y", "if");
-	private var SteamWrap_GetDigitalActionHandle = Loader.load("SteamWrap_GetDigitalActionHandle", "ci");
+	//private var SteamWrap_GetDigitalActionHandle = Loader.load("SteamWrap_GetDigitalActionHandle", "ci");
 	private var SteamWrap_ShowGamepadTextInput = Loader.load("SteamWrap_ShowGamepadTextInput", "iicici");
 	private var SteamWrap_TriggerHapticPulse = Loader.load("SteamWrap_TriggerHapticPulse", "iiiv");
 	private var SteamWrap_TriggerRepeatedHapticPulse = Loader.load("SteamWrap_TriggerRepeatedHapticPulse", "iiiiiiv");
@@ -578,6 +581,8 @@ class Controller {
 			// Old-school CFFI calls:
 			SteamWrap_GetConnectedControllers = cpp.Lib.load("steamwrap", "SteamWrap_GetConnectedControllers", 0);
 			SteamWrap_GetDigitalActionOrigins = cpp.Lib.load("steamwrap", "SteamWrap_GetDigitalActionOrigins", 3);
+			SteamWrap_GetDigitalActionHandle = cpp.Lib.load("steamwrap", "SteamWrap_GetDigitalActionHandle", 1);
+			SteamWrap_GetAnalogActionHandle = cpp.Lib.load("steamwrap", "SteamWrap_GetAnalogActionHandle", 1);
 			SteamWrap_GetEnteredGamepadTextInput = cpp.Lib.load("steamwrap", "SteamWrap_GetEnteredGamepadTextInput", 0);
 			SteamWrap_GetAnalogActionOrigins = cpp.Lib.load("steamwrap", "SteamWrap_GetAnalogActionOrigins", 3);
 			SteamWrap_InitControllers = cpp.Lib.load("steamwrap", "SteamWrap_InitControllers", 1);
