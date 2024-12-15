@@ -323,7 +323,7 @@ class UGC
 		if (active) return;
 		
 		appId = appId_;
-		customTrace = CustomTrace;
+		customTrace = (msg)->{CustomTrace(msg);};
 		#if cpp
 		try {
 			//Old-school CFFI calls:

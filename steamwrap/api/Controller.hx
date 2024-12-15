@@ -567,7 +567,7 @@ class Controller {
 	private var SteamWrap_ShowAnalogActionOrigins = Loader.load("SteamWrap_ShowAnalogActionOrigins", "iifffi");
 
 	private function new(CustomTrace:String->Void) {
-		customTrace = CustomTrace;
+		customTrace = (msg)->{CustomTrace(msg);};
 		init();
 	}
 

@@ -13,7 +13,7 @@ class SteamBase {
 	
 	private function init(appId:Int, customTrace:String->Void):Bool {
 		this.appId = appId;
-		this.customTrace = customTrace;
+		customTrace = (msg)->{customTrace(msg);};
 		//
 		var es = Loader.loadErrors;
 		if (es.length > 0) {

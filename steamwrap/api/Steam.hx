@@ -483,7 +483,7 @@ class Steam {
 	private static var leaderboardIds:Array<String>;
 	private static var leaderboardOps:List<LeaderboardOp>;
 
-	private static function customTrace(str:String) {
+	private static inline function customTrace(str:String) {
 		if (whenTrace != null)
 			whenTrace(str);
 		else
