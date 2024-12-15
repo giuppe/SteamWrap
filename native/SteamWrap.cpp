@@ -2764,7 +2764,7 @@ value SteamWrap_GetGlyphSVGForActionOrigin(value origin, value flags)
 	const char * result = SteamInput()->GetGlyphSVGForActionOrigin(eOrigin, nFlags);
 	return alloc_string(result);
 }
-DEFINE_PRIM(SteamWrap_GetGlyphSVGForActionOrigin,3);
+DEFINE_PRIM(SteamWrap_GetGlyphSVGForActionOrigin,2);
 
 //-----------------------------------------------------------------------------------------------------------
 value SteamWrap_GetGlyphForActionOrigin_Legacy(value origin)
