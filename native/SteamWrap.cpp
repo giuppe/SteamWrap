@@ -2569,21 +2569,21 @@ int SteamWrap_GetActionSetHandle(const char * actionSetName)
 DEFINE_PRIME1(SteamWrap_GetActionSetHandle);
 
 //-----------------------------------------------------------------------------------------------------------
-int SteamWrap_GetDigitalActionHandle(const char * actionName)
+value SteamWrap_GetDigitalActionHandle(const char * actionName)
 {
 
-	return SteamInput()->GetDigitalActionHandle(actionName);
+	return alloc_int(SteamInput()->GetDigitalActionHandle(actionName));
 }
-DEFINE_PRIME1(SteamWrap_GetDigitalActionHandle);
+DEFINE_PRIM(SteamWrap_GetDigitalActionHandle, 1);
 
 //-----------------------------------------------------------------------------------------------------------
-int SteamWrap_GetAnalogActionHandle(const char * actionName)
+value SteamWrap_GetAnalogActionHandle(const char * actionName)
 {
 
 	ControllerAnalogActionHandle_t handle = SteamInput()->GetAnalogActionHandle(actionName);
-	return handle;
+	return alloc_int(handle);
 }
-DEFINE_PRIME1(SteamWrap_GetAnalogActionHandle);
+DEFINE_PRIM(SteamWrap_GetAnalogActionHandle, 1);
 
 //-----------------------------------------------------------------------------------------------------------
 int SteamWrap_GetDigitalActionData(int controllerHandle, int actionHandle)
@@ -2764,7 +2764,7 @@ value SteamWrap_GetGlyphSVGForActionOrigin(value origin, int flags)
 	const char * result = SteamInput()->GetGlyphSVGForActionOrigin(eOrigin, nFlags);
 	return alloc_string(result);
 }
-DEFINE_PRIM(SteamWrap_GetGlyphSVGForActionOrigin,3);
+DEFINE_PRIM(SteamWrap_GetGlyphSVGForActionOrigin,2);
 
 //-----------------------------------------------------------------------------------------------------------
 value SteamWrap_GetGlyphForActionOrigin_Legacy(value origin)
